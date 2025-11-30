@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة تحليل العقود - نظام إدارة الاعتماد الأكاديمي</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h1>نظام إدارة الاعتماد الأكاديمي</h1>
+                </div>
+                <div class="header-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">445</span>
+                        <span class="stat-label">إجمالي العقود</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="main-nav">
+        <div class="container">
+            <div class="nav-tabs">
+                <button class="tab-btn active" data-tab="overview">
+                    <i class="fas fa-chart-pie"></i>
+                    لمحة عامة
+                </button>
+                <button class="tab-btn" data-tab="contracts">
+                    <i class="fas fa-file-contract"></i>
+                    العقود
+                </button>
+                <button class="tab-btn" data-tab="universities">
+                    <i class="fas fa-university"></i>
+                    الجامعات
+                </button>
+                <button class="tab-btn" data-tab="specializations">
+                    <i class="fas fa-book"></i>
+                    التخصصات
+                </button>
+                <button class="tab-btn" data-tab="dates">
+                    <i class="fas fa-calendar-alt"></i>
+                    البحث بالتواريخ
+                </button>
+                <button class="tab-btn" data-tab="departments">
+                    <i class="fas fa-building"></i>
+                    الإدارات
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Overview Tab -->
+            <div id="overview" class="tab-content active">
+                <h2 class="section-title">لمحة عامة - تحليل شامل للعقود</h2>
+                
+                <!-- Summary Cards -->
+                <div class="summary-cards">
+                    <div class="card summary-card">
+                        <div class="card-icon blue">
+                            <i class="fas fa-file-signature"></i>
+                        </div>
+                        <div class="card-info">
+                            <h3>إجمالي العقود</h3>
+                            <p class="big-number">445</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card summary-card">
+                        <div class="card-icon green">
+                            <i class="fas fa-university"></i>
+                        </div>
+                        <div class="card-info">
+                            <h3>عدد الجامعات</h3>
+                            <p class="big-number" id="totalUniversities">0</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card summary-card">
+                        <div class="card-icon purple">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <div class="card-info">
+                            <h3>عدد التخصصات</h3>
+                            <p class="big-number" id="totalSpecializations">0</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card summary-card">
+                        <div class="card-icon orange">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <div class="card-info">
+                            <h3>عدد الإدارات</h3>
+                            <p class="big-number">5</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Section -->
+                <div class="charts-grid">
+                    <div class="card chart-card">
+                        <h3 class="card-title">توزيع العقود حسب حالة الإنجاز</h3>
+                        <div id="progressChart" class="chart-container"></div>
+                    </div>
+                    
+                    <div class="card chart-card">
+                        <h3 class="card-title">توزيع العقود حسب الدرجة العلمية</h3>
+                        <div id="degreeChart" class="chart-container"></div>
+                    </div>
+                    
+                    <div class="card chart-card full-width">
+                        <h3 class="card-title">توزيع العقود حسب تاريخ الانتهاء</h3>
+                        <div id="expiryChart" class="chart-container"></div>
+                    </div>
+                    
+                    <div class="card chart-card full-width">
+                        <h3 class="card-title">توزيع العقود حسب الإدارات المختصة</h3>
+                        <div id="departmentChart" class="chart-container"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contracts Tab -->
+            <div id="contracts" class="tab-content">
+                <h2 class="section-title">إدارة العقود</h2>
+                
+                <!-- Contracts Filter -->
+                <div class="card filters-card">
+                    <div class="filters-grid">
+                        <div class="filter-group">
+                            <label>البحث</label>
+                            <input type="text" id="contractSearch" placeholder="ابحث عن اسم البرنامج أو الجامعة...">
+                        </div>
+                        <div class="filter-group">
+                            <label>الدرجة العلمية</label>
+                            <select id="degreeFilter">
+                                <option value="">الكل</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>نسبة الإنجاز</label>
+                            <select id="progressFilter">
+                                <option value="">الكل</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>الإدارة المختصة</label>
+                            <select id="departmentFilter">
+                                <option value="">الكل</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contracts by Expiry Date -->
+                <div class="expiry-sections">
+                    <div class="card expiry-section">
+                        <h3 class="section-subtitle expired">
+                            <i class="fas fa-exclamation-circle"></i>
+                            العقود المنتهية أو قريبة من الانتهاء (قبل نهاية 2024)
+                        </h3>
+                        <div id="contracts2024" class="contracts-grid"></div>
+                    </div>
+                    
+                    <div class="card expiry-section">
+                        <h3 class="section-subtitle warning">
+                            <i class="fas fa-clock"></i>
+                            العقود المنتهية في النصف الأول 2025 (يناير - يونيو)
+                        </h3>
+                        <div id="contractsH1_2025" class="contracts-grid"></div>
+                    </div>
+                    
+                    <div class="card expiry-section">
+                        <h3 class="section-subtitle info">
+                            <i class="fas fa-calendar-check"></i>
+                            العقود المنتهية في النصف الثاني 2025 (يوليو - ديسمبر)
+                        </h3>
+                        <div id="contractsH2_2025" class="contracts-grid"></div>
+                    </div>
+                    
+                    <div class="card expiry-section">
+                        <h3 class="section-subtitle success">
+                            <i class="fas fa-check-circle"></i>
+                            العقود المنتهية في 2026 وما بعد
+                        </h3>
+                        <div id="contracts2026" class="contracts-grid"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Universities Tab -->
+            <div id="universities" class="tab-content">
+                <h2 class="section-title">الجامعات والكليات</h2>
+                
+                <!-- Universities Filter -->
+                <div class="card filters-card">
+                    <div class="filter-group">
+                        <input type="text" id="universitySearch" placeholder="ابحث عن جامعة...">
+                    </div>
+                </div>
+
+                <!-- Universities Grid -->
+                <div id="universitiesGrid" class="universities-grid"></div>
+            </div>
+
+            <!-- Specializations Tab -->
+            <div id="specializations" class="tab-content">
+                <h2 class="section-title">التخصصات الأكاديمية</h2>
+                
+                <!-- Specializations Categories -->
+                <div class="spec-categories">
+                    <button class="cat-btn active" data-category="all">
+                        <i class="fas fa-th"></i>
+                        جميع التخصصات
+                    </button>
+                    <button class="cat-btn" data-category="engineering">
+                        <i class="fas fa-cogs"></i>
+                        الهندسية وعلوم الحاسب
+                    </button>
+                    <button class="cat-btn" data-category="health">
+                        <i class="fas fa-heartbeat"></i>
+                        الصحية
+                    </button>
+                    <button class="cat-btn" data-category="humanities">
+                        <i class="fas fa-users"></i>
+                        الإنسانية والتربوية
+                    </button>
+                    <button class="cat-btn" data-category="islamic">
+                        <i class="fas fa-mosque"></i>
+                        الإسلامية والعربية
+                    </button>
+                    <button class="cat-btn" data-category="science">
+                        <i class="fas fa-flask"></i>
+                        العلمية
+                    </button>
+                </div>
+
+                <!-- Specializations Grid -->
+                <div id="specializationsGrid" class="specializations-grid"></div>
+            </div>
+
+            <!-- Dates Tab -->
+            <div id="dates" class="tab-content">
+                <h2 class="section-title">البحث بالتواريخ</h2>
+                
+                <!-- Date Search -->
+                <div class="card filters-card">
+                    <div class="date-search-grid">
+                        <div class="filter-group">
+                            <label>تاريخ محدد</label>
+                            <input type="date" id="specificDate">
+                            <button class="btn btn-primary" onclick="searchByDate()">
+                                <i class="fas fa-search"></i>
+                                بحث
+                            </button>
+                        </div>
+                        <div class="filter-group">
+                            <label>نطاق التواريخ</label>
+                            <div class="date-range">
+                                <input type="date" id="startDate" placeholder="من">
+                                <input type="date" id="endDate" placeholder="إلى">
+                                <button class="btn btn-primary" onclick="searchByDateRange()">
+                                    <i class="fas fa-search"></i>
+                                    بحث
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Date Search Results -->
+                <div id="dateSearchResults" class="search-results"></div>
+            </div>
+
+            <!-- Departments Tab -->
+            <div id="departments" class="tab-content">
+                <h2 class="section-title">الإدارات المختصة</h2>
+                
+                <!-- Departments Grid -->
+                <div id="departmentsGrid" class="departments-grid"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Contract Details Modal -->
+    <div id="contractModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <p>&copy; 2024 نظام إدارة الاعتماد الأكاديمي - جميع الحقوق محفوظة</p>
+        </div>
+    </footer>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
